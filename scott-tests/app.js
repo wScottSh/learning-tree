@@ -49,6 +49,7 @@ const width = 960,
     height = 500;
 
 // this doesn't exist apparently
+debugger
 const force = d3.layout.force()
     .nodes(d3.values(nodes))
     .links(links)
@@ -69,7 +70,7 @@ svg.append("defs").selectAll("marker")
     .data(["suit", "licensing", "resolved"])
   .enter().append("marker")
     .attr("id", function(d) { return d; })
-    .attr("viewBox", "0 -5 10 10") // this is how 
+    .attr("viewBox", "0 -5 10 10") // this is how big the screen is? How is this different than the width/height above?
     .attr("refX", 15)
     .attr("refY", -1.5)
     .attr("markerWidth", 6)
