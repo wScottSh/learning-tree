@@ -1,0 +1,37 @@
+.link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 3px;
+}
+
+#licensing {
+  fill: brown;
+}
+
+.link.licensing {
+  stroke: brown;
+}
+
+.link.resolved {
+  stroke-dasharray: 0,2 1;
+}
+
+circle {
+  fill: #ccc;
+  stroke: #333;
+  stroke-width: 1.5px;
+}
+
+.visible {
+  visiblility: visible;
+}
+
+text {
+  font: 30px sans-serif;
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+}
+
+svg {
+  background-color: green;
+}
