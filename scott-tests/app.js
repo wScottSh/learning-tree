@@ -4,6 +4,10 @@ const randNum = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+const visiblity = () => {
+  document.getElementById(id).style.property = new style
+}
+
 // this is the actual lesson content
 // Source is the first node
 // Target is the second node
@@ -33,6 +37,7 @@ const nodes = {};
 // Compute the distinct nodes from the links. Looks at each object on the array and creates it.
 // FEATURE: Would like to pin the very first element in the array [0] as the center of the tree.
 links.forEach(function(link) {
+  // debugger
   link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
   link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
 });
@@ -76,10 +81,13 @@ const path = svg.append("g").selectAll("path")
     .attr("class", function(d) { return "link " + d.type; })
     .attr("marker-end", function(d) { return "url(#" + d.type + ")"; });
 
+debugger
 const circle = svg.append("g").selectAll("circle")
     .data(force.nodes())
   .enter().append("circle")
-    .attr("r", 25) // 6
+    .attr("r", 25)
+    .attr("onclick", "visibility()")
+    .attr("sourceId", nodes.name) // 6
     .call(force.drag);
 
 // const text = svg.append("g").selectAll("text")
