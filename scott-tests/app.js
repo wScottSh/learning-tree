@@ -1,37 +1,30 @@
+const randMax = 120;
+
+const randNum = (max) => {
+  return Math.floor(Math.random() * Math.floor(max));
+}
 
 // this is the actual lesson content
 // Source is the first node
 // Target is the second node
 // type is the kind of connector between nodes
 const links = [
-  {source: "Microsoft", target: "Amazon", type: "licensing"},
-  {source: "Microsoft", target: "HTC", type: "licensing"},
-  {source: "Samsung", target: "Apple", type: "suit"},
-  {source: "Motorola", target: "Apple", type: "suit"},
-  {source: "Nokia", target: "Apple", type: "resolved"},
-  {source: "HTC", target: "Apple", type: "suit"},
-  {source: "Kodak", target: "Apple", type: "suit"},
-  {source: "Microsoft", target: "Barnes & Noble", type: "suit"},
-  {source: "Microsoft", target: "Foxconn", type: "suit"},
-  {source: "Oracle", target: "Google", type: "suit"},
-  {source: "Apple", target: "HTC", type: "suit"},
-  {source: "Microsoft", target: "Inventec", type: "suit"},
-  {source: "Samsung", target: "Kodak", type: "resolved"},
-  {source: "LG", target: "Kodak", type: "resolved"},
-  {source: "RIM", target: "Kodak", type: "suit"},
-  {source: "Sony", target: "LG", type: "suit"},
-  {source: "Kodak", target: "LG", type: "resolved"},
-  {source: "Apple", target: "Nokia", type: "resolved"},
-  {source: "Qualcomm", target: "Nokia", type: "resolved"},
-  {source: "Apple", target: "Motorola", type: "suit"},
-  {source: "Microsoft", target: "Motorola", type: "suit"},
-  {source: "Motorola", target: "Microsoft", type: "suit"},
-  {source: "Huawei", target: "ZTE", type: "suit"},
-  {source: "Ericsson", target: "ZTE", type: "suit"},
-  {source: "Kodak", target: "Samsung", type: "resolved"},
-  {source: "Apple", target: "Samsung", type: "suit"},
-  {source: "Kodak", target: "RIM", type: "suit"},
-  {source: "Nokia", target: "Qualcomm", type: "suit"}
+  {source: "A", target: "B", type: "licensing"},
+  {source: "A", target: "C", type: "licensing"},
+  {source: "A", target: "D", type: "licensing"},
+  {source: "B", target: "E", type: "licensing"},
+  {source: "B", target: "F", type: "licensing"},
+  {source: "B", target: "G", type: "licensing"},
+  {source: "G", target: "H", type: "licensing"},
+  {source: "G", target: "I", type: "licensing"},
+  {source: "G", target: "J", type: "licensing"},
+  {source: "D", target: "M", type: "licensing"},
+  {source: "D", target: "L", type: "licensing"},
+  {source: "D", target: "K", type: "licensing"},
+  {source: "C", target: "N", type: "licensing"},
+  {source: "C", target: "O", type: "licensing"},
+  {source: "C", target: "P", type: "licensing"},
+  {source: "P", target: "Q", type: "licensing"}
 ];
 
 // defines nodes as a global object.
@@ -44,17 +37,15 @@ links.forEach(function(link) {
   link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
 });
 
-// I believe this is the screen height and width. I'm defining the "canvas" here, but it starts in the top left corner. Can I move that to where I want it on the tree with CSS?
+// I believe this is the screen height and width. I'm defining the "svg" here, but it starts in the top left corner. Can I move that to where I want it on the tree with CSS?
 const width = 960,
     height = 500;
 
-// this doesn't exist apparently
-debugger
 const force = d3.layout.force()
     .nodes(d3.values(nodes))
     .links(links)
     .size([width, height])
-    .linkDistance(60)
+    .linkDistance(randNum(randMax))
     .charge(-300)
     .on("tick", tick)
     .start();
@@ -88,21 +79,21 @@ const path = svg.append("g").selectAll("path")
 const circle = svg.append("g").selectAll("circle")
     .data(force.nodes())
   .enter().append("circle")
-    .attr("r", 6)
+    .attr("r", 25) // 6
     .call(force.drag);
 
-const text = svg.append("g").selectAll("text")
-    .data(force.nodes())
-  .enter().append("text")
-    .attr("x", 8)
-    .attr("y", ".31em")
-    .text(function(d) { return d.name; });
+// const text = svg.append("g").selectAll("text")
+//     .data(force.nodes())
+//   .enter().append("text")
+//     .attr("x", 8)
+//     .attr("y", ".31em")
+//     .text(function(d) { return d.name; });
 
 // Use elliptical arc path segments to doubly-encode directionality.
 function tick() {
   path.attr("d", linkArc);
   circle.attr("transform", transform);
-  text.attr("transform", transform);
+  // text.attr("transform", transform);
 }
 
 function linkArc(d) {

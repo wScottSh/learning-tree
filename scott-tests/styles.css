@@ -5,11 +5,11 @@
 }
 
 #licensing {
-  fill: green;
+  fill: brown;
 }
 
 .link.licensing {
-  stroke: green;
+  stroke: brown;
 }
 
 .link.resolved {
@@ -23,7 +23,11 @@ circle {
 }
 
 text {
-  font: 10px sans-serif;
+  font: 30px sans-serif;
   pointer-events: none;
   text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+}
+
+svg {
+  background-color: green;
 }
